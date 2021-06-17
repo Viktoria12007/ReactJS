@@ -21,13 +21,16 @@ module.exports = {
   resolve: {
     // Add `.ts` and `.tsx` as a resolvable extension.
     extensions: [".ts", ".tsx", ".js"]
+    // alias: {
+    //   style: path.resolve(__dirname, 'src')
+    // }
   },
   module: {
     rules: [
       // all files with a `.ts` or `.tsx` extension will be handled by `ts-loader`
       {
         test: /\.tsx?$/,
-        loader: 'ts-loader'
+        use: ['ts-loader']
       },
       {
         test: /\.css$/,
@@ -37,8 +40,13 @@ module.exports = {
           loader: 'css-loader',
           options: {
             modules: {
+              compileType: "module",
               mode: 'local',
+              exportGlobals: true,
               localIdentName: '[name]__[local]--[hash:base64:5]',
+              localIdentContext: path.resolve(__dirname, "src"),
+              localIdentHashPrefix: "my-custom-hash",
+              exportLocalsConvention: "camelCase",
             }
           }
       }

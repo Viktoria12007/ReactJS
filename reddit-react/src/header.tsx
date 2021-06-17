@@ -1,7 +1,11 @@
-import styles from './header.css';
-const Header = () => {
+import * as React from 'react';
+import styles from './Header.css';
+import styles1 from './Main.css';
+
+export function Header () {
+
   return (
- <div className={styles.example}>Hello React</div>
-)
-};
-export default Header;
+    <div className={`${styles.example} ${styles1.example}`}>Hello React</div>
+);
+
+}
