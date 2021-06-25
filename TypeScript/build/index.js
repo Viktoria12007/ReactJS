@@ -19,7 +19,6 @@ var homeTask1 = {
 };
 console.log(homeTask1);
 var homeTask2 = {
-    data: '42',
     externalData: {
         value: 'win',
     }

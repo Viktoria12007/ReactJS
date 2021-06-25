@@ -8,9 +8,14 @@ console.log(concat('Hello ', 'World'));
 interface ITask2 {
     howIDoIt: string,
 
-    simeArray: [string, string, number],
+    simeArray: Array<string | number>,
 
-    withData: [{ howIDoIt: string, simeArray: [string, number] }],
+    withData: Array<IWithData>,
+}
+
+interface IWithData {
+    howIDoIt: string,
+    simeArray: Array<string | number>,
 }
 
 const MyHometask: ITask2 = {
@@ -62,20 +67,20 @@ interface IHomeTask {
 // 'extarnalData'. И другие ключи будут не доступны.
 
 
-type MyPartial2<T> = {
+type TMyPartial2<T> = {
 
-    [N in keyof T]?: T[N] extends object ? MyPartial2<T[N]> : T[N];
-
-}
-
-
-type MyPartial1<T, K extends keyof T> = {
-
-    [N in K]: T[N] extends object ? MyPartial2<T[N]> : T[N];
+    [N in keyof T]?: T[N] extends object ? TMyPartial2<T[N]> : T[N];
 
 }
 
-const homeTask1: MyPartial1<IHomeTask, 'externalData'> = {
+
+type TMyPartial1<T, K extends keyof T> = {
+
+    [N in K]: T[N] extends object ? TMyPartial2<T[N]> : T[N];
+
+}
+
+const homeTask1: TMyPartial1<IHomeTask, 'externalData'> = {
 
     externalData: {
         value: 'win',
@@ -87,13 +92,13 @@ console.log(homeTask1);
 //Второй вариант четвёртого задания. В этом случае можно создать объект 
 //с любыми ключами из interFace, в том числе и 'extarnalData'
 
-type MyPartial<T> = {
+type TMyPartial<T> = {
 
-    [N in keyof T]?: T[N] extends object ? MyPartial<T[N]> : T[N]
+    [N in keyof T]?: T[N] extends object ? TMyPartial<T[N]> : T[N]
 
 }
 
-const homeTask2: MyPartial<IHomeTask> = {
+const homeTask2: TMyPartial<IHomeTask> = {
 
     externalData: {
         value: 'win',
