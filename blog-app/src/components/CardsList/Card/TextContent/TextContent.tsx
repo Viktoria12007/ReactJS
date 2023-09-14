@@ -1,5 +1,3 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
 import avatar from './avatar.png';
 import style from './TextContent.module.css';
 
