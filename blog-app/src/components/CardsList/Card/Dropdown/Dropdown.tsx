@@ -1,6 +1,7 @@
 import style from './Dropdown.module.css';
 import * as React from "react";
 import {useEffect, useState} from "react";
+import {NOOP} from "../../../../utils/noop";
 
 interface IDropdownProps {
     button: React.ReactNode,
@@ -9,7 +10,6 @@ interface IDropdownProps {
     onOpen?: () => void,
     onClose?: () => void,
 }
-const NOOP = () => {};
 
 export default function Dropdown({ button, children, isOpen, onOpen = NOOP, onClose = NOOP }: IDropdownProps): React.JSX.Element {
     const [openDropdown, setOpenDropdown] = useState(isOpen);
