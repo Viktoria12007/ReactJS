@@ -1,6 +1,7 @@
 import style from './Controls.module.css';
+import * as React from "react";
 
-function Controls() {
+export default function Controls(): React.JSX.Element {
 	return (
 		<div className={style.controls}>
 			<div className={style.karmaCounter}>
@@ -39,5 +40,3 @@ function Controls() {
 		</div>
 	);
 }
-
-export default Controls;

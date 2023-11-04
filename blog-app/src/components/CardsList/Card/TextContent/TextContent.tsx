@@ -1,7 +1,8 @@
 import avatar from './avatar.png';
 import style from './TextContent.module.css';
+import * as React from "react";
 
-function TextContent() {
+export default function TextContent(): React.JSX.Element {
 	return (
 		<div className={style.textContent}>
 			<div className={style.metaData}>
@@ -19,5 +20,3 @@ function TextContent() {
 		</div>
 	);
 }
-
-export default TextContent;
