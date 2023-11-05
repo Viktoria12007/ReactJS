@@ -1,7 +1,7 @@
 import style from './Dropdown.module.css';
 import * as React from "react";
 import {useEffect, useState} from "react";
-import {NOOP} from "../../../../utils/noop";
+import {NOOP} from "../../utils/noop";
 
 interface IDropdownProps {
     button: React.ReactNode,

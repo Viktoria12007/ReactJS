@@ -1,7 +1,7 @@
 import styleMenu from './Menu.module.css';
-import styleDropdown from '../Dropdown/Dropdown.module.css';
+import styleDropdown from '../../../Dropdown/Dropdown.module.css';
 import { useState } from "react";
-import Dropdown from "../Dropdown/Dropdown";
+import Dropdown from "../../../Dropdown/Dropdown";
 import * as React from "react";
 import { GenericList } from "../../../GenericList/GenericList";
 import { generateId } from "../../../../utils/generateRandomIndex";
