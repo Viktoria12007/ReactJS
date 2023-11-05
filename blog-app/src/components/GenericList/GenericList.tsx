@@ -18,19 +18,20 @@ interface IItem {
 
 interface IGenericListProps {
     list: IItem[],
+    postId?: string,
 }
 
 function getId(id) {
     console.debug(id);
 }
 
-export function GenericList({ list }: IGenericListProps) {
+export function GenericList({ list, postId }: IGenericListProps) {
     return (
         <>
             {list.map(({As = 'li', text, onClick = getId, className = styleDropdown, id, href, icon}, index) => (
                     <As
                         className={className.menuItem}
-                        onClick={() => onClick(id)}
+                        onClick={() => onClick(postId)}
                         key={id}
                         href={href}
                     >
