@@ -1,5 +1,7 @@
 import * as React from "react";
-import styleDropdown from "../CardsList/Card/Dropdown/Dropdown.module.css";
+import styleDropdown from "../Dropdown/Dropdown.module.css";
+import Icon from "../Icons/components/Icon";
+import { INameIconProp } from "../Icons/types/IIconProps";
 
 interface IItem {
     id: string,
@@ -8,7 +10,10 @@ interface IItem {
     className?: object,
     As?: 'a' | 'li' | 'button' | 'div',
     href?: string,
-    svg?: string,
+    icon?: {
+        name: INameIconProp,
+        size?: number,
+    },
 }
 
 interface IGenericListProps {
@@ -22,7 +27,7 @@ function getId(id) {
 export function GenericList({ list }: IGenericListProps) {
     return (
         <>
-            {list.map(({As = 'li', text, onClick = getId, className = styleDropdown, id, href, svg}, index) => (
+            {list.map(({As = 'li', text, onClick = getId, className = styleDropdown, id, href, icon}, index) => (
                     <As
                         className={className.menuItem}
                         onClick={() => onClick(id)}
@@ -30,7 +35,7 @@ export function GenericList({ list }: IGenericListProps) {
                         href={href}
                     >
                         <button className={className.menuItemButton} >
-                            <div dangerouslySetInnerHTML={{ __html: svg || '' }}></div>
+                            { icon && (icon.size ? <Icon name={icon.name} size={icon.size} /> : <Icon name={icon.name} />) }
                             <span>{text}</span>
                         </button>
                     </As>

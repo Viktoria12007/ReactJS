@@ -5,14 +5,14 @@ import Dropdown from "../Dropdown/Dropdown";
 import * as React from "react";
 import { GenericList } from "../../../GenericList/GenericList";
 import { generateId } from "../../../../utils/generateRandomIndex";
-import {commentSvg, complainSvg, hideSvg, saveSvg, shareSvg} from "./listIcons";
+import MenuIcon from "../../../Icons/components/MenuIcon";
 
 const list = [
-	{ text: 'Коментарии', svg: commentSvg },
-	{ text: 'Поделиться', svg: shareSvg },
-	{ text: 'Скрыть', svg: hideSvg },
-	{ text: 'Сохранить', svg: saveSvg },
-	{ text: 'Пожаловаться', svg: complainSvg },
+	{ text: 'Коментарии', icon: { name: 'commentIcon' } },
+	{ text: 'Поделиться', icon: { name: 'shareIcon' } },
+	{ text: 'Скрыть', icon: { name: 'hideIcon' } },
+	{ text: 'Сохранить', icon: { name: 'saveIcon' } },
+	{ text: 'Пожаловаться', icon: { name: 'complainIcon' } },
 ].map(generateId);
 
 export default function Menu(): React.JSX.Element {
@@ -21,12 +21,8 @@ export default function Menu(): React.JSX.Element {
 		setOpenDropdown(!openDropdown);
 	}
 	const menuButton = (<button className={styleMenu.menuButton} onClick={handleClick}>
-		<svg width="5" height="20" viewBox="0 0 5 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-			<circle cx="2.5" cy="2.5" r="2.5" fill="#D9D9D9" />
-			<circle cx="2.5" cy="10" r="2.5" fill="#D9D9D9" />
-			<circle cx="2.5" cy="17.5" r="2.5" fill="#D9D9D9" />
-		</svg>
-	</button>);
+							<MenuIcon />
+						</button>);
 	return (
 		<div className={styleMenu.menu}>
 			<Dropdown onOpen={() => console.log('open')} onClose={() => console.log('close')} button={menuButton}>
