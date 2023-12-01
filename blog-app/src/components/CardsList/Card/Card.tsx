@@ -5,13 +5,13 @@ import Preview from './Preview/Preview.js';
 import TextContent from './TextContent/TextContent.js';
 import * as React from "react";
 
-export default function Card(): React.JSX.Element {
+export default function Card({data}): React.JSX.Element {
 	return (
 		<li className={style.card}>
-			<TextContent />
-			<Preview />
+			<TextContent data={data} />
+			<Preview preview={data.thumbnail} />
 			<Menu />
-			<Controls />
+			<Controls data={data}/>
 		</li>
 	);
 }
