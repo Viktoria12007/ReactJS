@@ -1,9 +1,8 @@
 import * as React from "react";
 import EIcons from "../Icons";
-import { INameIconProp } from "../types/IIconProps";
 
 interface IIconProps {
-    name: INameIconProp,
+    name: string,
     size?: number,
 }
 
