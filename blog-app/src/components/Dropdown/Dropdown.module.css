@@ -1,7 +1,5 @@
 .dropdown {
     position: absolute;
-    right: 0;
-    top: 10px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
     border-radius: 3px;
     background-color: var(--white);
@@ -58,8 +56,14 @@
     flex: 1 1 0%;
 }
 
+.backdrop {
+    position: fixed;
+    inset: 0;
+}
+
 .listContainer {
-    position: relative;
+    position: absolute;
+    inset: 0;
 }
 
 .list {
@@ -72,10 +76,6 @@
 }
 
 @media all and (min-width: 1024px) {
-    .dropdown {
-        right: -200%;
-        top: 20px;
-    }
     .closeButton {
         font-size: 14px;
         line-height: 16px;
@@ -94,10 +94,6 @@
 }
 
 @media all and (min-width: 1540px) {
-    .dropdown {
-        right: -200%;
-        top: 20px;
-    }
     .closeButton {
         display: none;
     }
