@@ -26,12 +26,10 @@ export default function Menu(): React.JSX.Element {
 	return (
 		<div className={styleMenu.menu}>
 			<Dropdown onOpen={() => console.log('open')} onClose={() => console.log('close')} button={menuButton}>
-				<div className={styleDropdown.dropdown}>
-					<ul className={styleDropdown.menuItemsList}>
-						<GenericList list={list} postId={'1234'} />
-					</ul>
-					<button className={styleDropdown.closeButton}>Закрыть</button>
-				</div>
+				<ul className={styleDropdown.menuItemsList}>
+					<GenericList list={list} postId={'1234'} />
+				</ul>
+				<button className={styleDropdown.closeButton}>Закрыть</button>
 			</Dropdown>
 		</div>
 	);
