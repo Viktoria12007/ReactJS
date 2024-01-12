@@ -1,13 +1,12 @@
 import style from "./Post.module.css";
 import { createPortal } from 'react-dom';
-import {useContext, useEffect, useRef} from "react";
+import {useEffect, useRef} from "react";
 import Controls from "../CardsList/Card/Controls/Controls";
 import * as React from "react";
 import TextContent from "../CardsList/Card/TextContent/TextContent";
-import {Comment} from "../Comments/Comment";
+import {Comments} from "../Comments/Comments";
 import Icon from "../Icons/components/Icon";
 import {CommentFormControl} from "../CommentForm/CommentFormControl";
-import {commentContext} from "../../context/commentContext";
 
 interface IPost {
     onClose?: () => void;
@@ -17,7 +16,6 @@ interface IPost {
 
 export function Post({ onClose, data, comments }: IPost) {
     const ref = useRef<HTMLDivElement>(null);
-    const { value, onChange } = useContext(commentContext);
 
     function handleClick(e: MouseEvent) {
         if (e.target instanceof Node && !ref.current?.contains(e.target)) {
@@ -46,12 +44,8 @@ export function Post({ onClose, data, comments }: IPost) {
             <div className={style.content}>
                 <p className={style.textModal}>{data.selftext}</p>
                 <img className={style.previewImg} alt='post' src={data.thumbnail}></img>
-                <CommentFormControl value={value} onChange={onChange} />
-                <ul>
-                    { comments.map((comment) => (
-                        <Comment comment={comment} key={self.crypto.randomUUID()}/>
-                    ))}
-                </ul>
+                <CommentFormControl/>
+                <Comments comments={comments}/>
             </div>
         </div>, node);
 }
