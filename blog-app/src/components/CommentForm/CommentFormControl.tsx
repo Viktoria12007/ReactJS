@@ -1,18 +1,13 @@
 import style from './CommentForm.module.css';
-import {ChangeEvent, FormEvent, useContext, useEffect, useRef, useState} from "react";
+import {ChangeEvent, FormEvent, useContext} from "react";
 import {userContext} from "../../context/userContext";
 import Icon from "../Icons/components/Icon";
 import * as React from "react";
+import {commentContext} from "../../context/commentContext";
 
-export function CommentFormControl({value = null, onChange = null}) {
-    if (!value && !onChange) {
-        [value, onChange] = useState('');
-    }
+export function CommentFormControl() {
+    const { value, onChange } = useContext(commentContext);
     const { name } = useContext(userContext);
-    const commentRef = useRef<HTMLTextAreaElement>(null);
-    useEffect(() => {
-        commentRef.current?.focus();
-    }, []);
 
     function handleChange(e: ChangeEvent<HTMLTextAreaElement>) {
         onChange(e.target.value);
@@ -24,7 +19,7 @@ export function CommentFormControl({value = null, onChange = null}) {
 
     return (
         <form className={style.form} onSubmit={handleSubmit}>
-            <textarea ref={commentRef} className={style.input} placeholder={`${name || 'Аноним'}, оставьте ваш комментарий` } value={value} onChange={handleChange}/>
+            <textarea className={style.input} placeholder={`${name || 'Аноним'}, оставьте ваш комментарий` } value={value} onChange={handleChange}/>
             <div className={style.wrap}>
                 <ul className={style.list}>
                     <li className={style.item}>

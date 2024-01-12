@@ -1,5 +1,5 @@
 import style from './CommentForm.module.css';
-import {FormEvent, useContext, useEffect, useRef} from "react";
+import {FormEvent, useContext, useRef} from "react";
 import {userContext} from "../../context/userContext";
 import Icon from "../Icons/components/Icon";
 import * as React from "react";
@@ -7,9 +7,6 @@ import * as React from "react";
 export function CommentFormUncontrol() {
     const { name } = useContext(userContext);
     const commentRef = useRef<HTMLTextAreaElement>(null);
-    useEffect(() => {
-        commentRef.current?.focus();
-    }, []);
 
     function handleSubmit(e: FormEvent) {
         e.preventDefault();
