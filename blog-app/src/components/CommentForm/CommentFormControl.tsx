@@ -3,23 +3,19 @@ import {ChangeEvent, FormEvent, useContext} from "react";
 import {userContext} from "../../context/userContext";
 import Icon from "../Icons/components/Icon";
 import * as React from "react";
-import {commentContext} from "../../context/commentContext";
 
-export function CommentFormControl() {
-    const { value, onChange } = useContext(commentContext);
+type Props = {
+    value: string,
+    onChange: (e: ChangeEvent<HTMLTextAreaElement>) => void,
+    onSubmit: (e: FormEvent) => void,
+}
+
+export function CommentFormControl({value, onChange, onSubmit}: Props) {
     const { name } = useContext(userContext);
 
-    function handleChange(e: ChangeEvent<HTMLTextAreaElement>) {
-        onChange(e.target.value);
-    }
-    function handleSubmit(e: FormEvent) {
-        e.preventDefault();
-        console.log(value);
-    }
-
     return (
-        <form className={style.form} onSubmit={handleSubmit}>
-            <textarea className={style.input} placeholder={`${name || 'Аноним'}, оставьте ваш комментарий` } value={value} onChange={handleChange}/>
+        <form className={style.form} onSubmit={onSubmit}>
+            <textarea className={style.input} placeholder={`${name || 'Аноним'}, оставьте ваш комментарий` } value={value} onChange={onChange}/>
             <div className={style.wrap}>
                 <ul className={style.list}>
                     <li className={style.item}>
