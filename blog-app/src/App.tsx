@@ -8,10 +8,8 @@ import {useEffect, useState} from "react";
 import {tokenContext} from "./context/tokenContext";
 import {UserContextProvider} from "./context/userContext";
 import {PostsContextProvider} from "./context/postsContext";
-import {commentContext} from "./context/commentContext";
 
 export default function App(): React.JSX.Element {
-    const [commentValue, setCommentValue] = useState('');
     const [token, setToken] = useState('');
     const axiosConfig = { auth: { username: import.meta.env.VITE_CLIENT_ID, password: 'xQJPwicUqjnXixMNK6KCsd2OqCqCCg' },
         headers: { "Content-type": "application/x-www-form-urlencoded" } } as InternalAxiosRequestConfig;
@@ -28,20 +26,15 @@ export default function App(): React.JSX.Element {
     }, []);
 
     return (
-        <commentContext.Provider value={{
-            value: commentValue,
-            onChange: setCommentValue,
-        }}>
-            <tokenContext.Provider value={token}>
-                <UserContextProvider value={{}}>
-                    <PostsContextProvider value={[]}>
-                        <div className = 'App' >
-                            <Header />
-                            <CardsList />
-                        </div>
-                    </PostsContextProvider>
-                </UserContextProvider>
-            </tokenContext.Provider>
-        </commentContext.Provider>
+        <tokenContext.Provider value={token}>
+            <UserContextProvider value={{}}>
+                <PostsContextProvider value={[]}>
+                    <div className = 'App' >
+                        <Header />
+                        <CardsList />
+                    </div>
+                </PostsContextProvider>
+            </UserContextProvider>
+        </tokenContext.Provider>
     );
 }
