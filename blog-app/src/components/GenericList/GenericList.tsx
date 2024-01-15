@@ -1,7 +1,6 @@
 import * as React from "react";
 import styleDropdown from "../Dropdown/Dropdown.module.css";
 import Icon from "../Icons/components/Icon";
-import { INameIconProp } from "../Icons/types/IIconProps";
 
 interface IItem {
     id: string,
@@ -11,7 +10,7 @@ interface IItem {
     As?: 'a' | 'li' | 'button' | 'div',
     href?: string,
     icon?: {
-        name: INameIconProp,
+        name: string,
         size?: number,
     },
 }
