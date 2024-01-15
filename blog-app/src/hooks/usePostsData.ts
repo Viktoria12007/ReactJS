@@ -1,10 +1,6 @@
 import {useEffect, useState} from "react";
 import axios from "axios";
 
-// interface IPostsData {
-//     id: string,
-// }
-
 export function usePostsData() {
     const [posts, setPosts] = useState([]);
     useEffect(() => {
