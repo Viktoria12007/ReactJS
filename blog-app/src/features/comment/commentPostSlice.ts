@@ -17,7 +17,8 @@ export const commentPostSlice = createSlice({
     }
 })
 
-// Action creators are generated for each case reducer function
 export const { updateComment } = commentPostSlice.actions
+
+export const commentPost = state => state.commentPost.value;
 
 export default commentPostSlice.reducer

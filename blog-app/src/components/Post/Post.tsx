@@ -6,7 +6,7 @@ import * as React from "react";
 import TextContent from "../CardsList/Card/TextContent/TextContent";
 import {Comments} from "../Comments/Comments";
 import Icon from "../Icons/components/Icon";
-import {CommentFormContainer} from "../ComentFormContainer";
+import {CommentFormContainer} from "../CommentFormContainer";
 
 interface IPost {
     onClose?: () => void;

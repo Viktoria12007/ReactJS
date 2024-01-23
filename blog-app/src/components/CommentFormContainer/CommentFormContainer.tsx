@@ -3,22 +3,23 @@ import * as React from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {updateComment} from "../../features/comment/commentPostSlice";
 import {CommentFormControl} from "../CommentForm/CommentFormControl";
+import {commentPost} from "../../features/comment/commentPostSlice";
 
 export function CommentFormContainer() {
-    const value = useSelector(state => state.commentPost.value);
     const dispatch = useDispatch();
+    const comment = useSelector(commentPost);
 
     function handleChange(e: ChangeEvent<HTMLTextAreaElement>) {
         dispatch(updateComment(e.target.value));
     }
     function handleSubmit(e: FormEvent) {
         e.preventDefault();
-        console.log(value);
+        console.log(comment);
     }
 
     return (
         <CommentFormControl
-            value={value}
+            value={comment}
             onChange={handleChange}
             onSubmit={handleSubmit}
         />
