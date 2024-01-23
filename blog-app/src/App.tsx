@@ -27,13 +27,11 @@ export default function App(): React.JSX.Element {
     }, []);
 
     return (
-        <UserContextProvider value={{}}>
-            <PostsContextProvider value={[]}>
-                <div className = 'App' >
-                    <Header />
-                    <CardsList />
-                </div>
-            </PostsContextProvider>
-        </UserContextProvider>
+        <PostsContextProvider value={[]}>
+            <div className = 'App' >
+                <Header />
+                <CardsList />
+            </div>
+        </PostsContextProvider>
     );
 }

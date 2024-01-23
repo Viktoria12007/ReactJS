@@ -1,10 +1,11 @@
 import style from './CommentForm.module.css';
-import {ChangeEvent, FormEvent, useContext, useEffect, useRef, useState} from "react";
-import {userContext} from "../../context/userContext";
+import {ChangeEvent, FormEvent, useEffect, useRef, useState} from "react";
+import {useSelector} from "react-redux";
+import {userData} from "../../features/user/userSlice";
 
 export function CommentFormAnswer() {
     const [valueCommentFormAnswer, onChangeCommentFormAnswer] = useState('');
-    const { name } = useContext(userContext);
+    const { name } = useSelector(userData);
     const commentRef = useRef<HTMLTextAreaElement>(null);
     useEffect(() => {
         commentRef.current?.focus();
@@ -15,7 +16,7 @@ export function CommentFormAnswer() {
     }
     function handleSubmit(e: FormEvent) {
         e.preventDefault();
-        console.log(value);
+        console.log(valueCommentFormAnswer);
     }
 
     return (

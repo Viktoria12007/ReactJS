@@ -1,8 +1,9 @@
 import style from './CommentForm.module.css';
-import {ChangeEvent, FormEvent, useContext} from "react";
-import {userContext} from "../../context/userContext";
+import {ChangeEvent, FormEvent} from "react";
 import Icon from "../Icons/components/Icon";
 import * as React from "react";
+import {userData} from "../../features/user/userSlice";
+import {useSelector} from "react-redux";
 
 type Props = {
     value: string,
@@ -11,7 +12,7 @@ type Props = {
 }
 
 export function CommentFormControl({value, onChange, onSubmit}: Props) {
-    const { name } = useContext(userContext);
+    const { name } = useSelector(userData);
 
     return (
         <form className={style.form} onSubmit={onSubmit}>
