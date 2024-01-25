@@ -6,7 +6,8 @@ import * as React from "react";
 import TextContent from "../CardsList/Card/TextContent/TextContent";
 import {Comments} from "../Comments/Comments";
 import Icon from "../Icons/components/Icon";
-import {CommentFormContainer} from "../CommentFormContainer";
+// import {CommentFormContainer} from "../CommentFormContainer";
+import {CommentFormFormik} from "../CommentForm/CommentFormFormik";
 
 interface IPost {
     onClose?: () => void;
@@ -44,7 +45,8 @@ export function Post({ onClose, data, comments }: IPost) {
             <div className={style.content}>
                 <p className={style.textModal}>{data.selftext}</p>
                 <img className={style.previewImg} alt='post' src={data.thumbnail}></img>
-                <CommentFormContainer/>
+                {/*<CommentFormContainer/>*/}
+                <CommentFormFormik/>
                 <Comments comments={comments}/>
             </div>
         </div>, node);
