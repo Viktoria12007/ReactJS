@@ -1,11 +1,12 @@
 import style from './CommentForm.module.css';
-import {FormEvent, useContext, useRef} from "react";
-import {userContext} from "../../context/userContext";
+import {FormEvent, useRef} from "react";
 import Icon from "../Icons/components/Icon";
 import * as React from "react";
+import {useSelector} from "react-redux";
+import {userData} from "../../features/user/userSlice";
 
 export function CommentFormUncontrol() {
-    const { name } = useContext(userContext);
+    const { name } = useSelector(userData);
     const commentRef = useRef<HTMLTextAreaElement>(null);
 
     function handleSubmit(e: FormEvent) {
