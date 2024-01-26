@@ -3,7 +3,6 @@ import CardsList from './components/CardsList/CardsList';
 import * as React from "react";
 import Header from "./components/Header/Header";
 import {useEffect} from "react";
-import {PostsContextProvider} from "./context/postsContext";
 import {useDispatch} from "react-redux";
 import {fetchToken, setToken} from "./features/token/tokenSlice";
 import {InternalAxiosRequestConfig} from "axios";
@@ -26,11 +25,9 @@ export default function App(): React.JSX.Element {
     }, []);
 
     return (
-        <PostsContextProvider value={[]}>
-            <div className = 'App' >
-                <Header />
-                <CardsList />
-            </div>
-        </PostsContextProvider>
+        <div className = 'App' >
+            <Header />
+            <CardsList />
+        </div>
     );
 }
