@@ -10,6 +10,7 @@ export default function CardsList(): React.JSX.Element {
 	const [errorLoading, setErrorLoading] = useState('');
 	const [nextAfter, setNextAfter] = useState('');
 	const bottomOfList = useRef<HTMLDivElement>(null);
+	const [countLoad, setCountLoad] = useState(0);
 	const cards = posts.map((post) => <Card key={post.data.id} data={post.data}/>);
 
 	useEffect(() => {
@@ -21,22 +22,23 @@ export default function CardsList(): React.JSX.Element {
 					{
 						params: {
 							limit: 10,
-							['after']: nextAfter,
+							after: nextAfter,
 						}
 					});
 				setNextAfter(after);
 				setPosts(prevState => {
-					console.log(prevState);
 					return prevState.concat(...children);
 				});
+				setCountLoad(countLoad + 1);
 			} catch (e) {
+				setCountLoad(0);
 				setErrorLoading(String(e));
 			} finally {
 				setLoading(false);
 			}
 		}
 		const observer = new IntersectionObserver((entries, observer) => {
-			if (entries[0].isIntersecting) {
+			if (entries[0].isIntersecting && countLoad < 3) {
 				console.log('load more');
 				load();
 			}
@@ -49,7 +51,11 @@ export default function CardsList(): React.JSX.Element {
 				observer.unobserve(bottomOfList.current);
 			}
 		}
-	}, [bottomOfList.current, nextAfter]);
+	}, [nextAfter, countLoad]);
+
+	function handlerLoadMore() {
+		setCountLoad(0);
+	}
 
 	return (
 		<ul className={style.cardsList}>
@@ -58,7 +64,8 @@ export default function CardsList(): React.JSX.Element {
 			)}
 			{cards}
 			<div ref={bottomOfList}></div>
-			{ loading && <div style={{textAlign: 'center'}}>Загрузка...</div> }
+			{ loading && countLoad < 3 && <div style={{textAlign: 'center'}}>Загрузка...</div> }
+			{ countLoad >= 3 && <button className={style.loadMore} onClick={handlerLoadMore}>Загрузить ещё</button> }
 			{ errorLoading && <div role='alert' style={{textAlign: 'center'}}>{errorLoading}</div> }
 		</ul>
 	);

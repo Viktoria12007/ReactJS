@@ -1,3 +1,13 @@
+.loadMore {
+    position: relative;
+    left: 50%;
+    font-weight: bold;
+    padding: 15px 25px;
+    background-color: lightgreen;
+    border-radius: 25px;
+    transform: translateX(-50%);
+}
+
 @media all and (min-width: 1024px) {
     .cardsList {
         padding: 40px 0;
