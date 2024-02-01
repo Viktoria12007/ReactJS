@@ -1,0 +1,15 @@
+.errorLayout {
+    height: 100vh;
+}
+
+.error {
+    display: inline-block;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    padding: 30px 60px;
+    text-align: center;
+    font-weight: bold;
+    background-color: lightcoral;
+    transform: translate(-50%, -50%);
+}

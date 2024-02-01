@@ -2,37 +2,25 @@ import Card from './Card/Card';
 import style from './CardsList.module.css';
 import * as React from "react";
 import {useEffect, useRef, useState} from "react";
-import axios from "axios";
+import {fetchPosts, posts, after, countFetch, setCountFetch, error} from "../../features/posts/postsSlice";
+import {useDispatch, useSelector} from "react-redux";
+import {Outlet} from "react-router-dom";
 
 export default function CardsList(): React.JSX.Element {
-	const [posts, setPosts] = useState<any[]>([]);
 	const [loading, setLoading] = useState(false);
-	const [errorLoading, setErrorLoading] = useState('');
-	const [nextAfter, setNextAfter] = useState('');
+	const countLoad = useSelector(countFetch);
 	const bottomOfList = useRef<HTMLDivElement>(null);
-	const [countLoad, setCountLoad] = useState(0);
-	const cards = posts.map((post) => <Card key={post.data.id} data={post.data}/>);
+	const dispatch = useDispatch();
+	const allPosts = useSelector(posts);
+	const nextAfter = useSelector(after);
+	const errorLoading = useSelector(error);
+	const cards = allPosts.map((post) => <Card key={post.data.id} data={post.data}/>);
 
 	useEffect(() => {
-		async function load() {
+		function load() {
 			setLoading(true);
-			setErrorLoading('');
 			try {
-				const { data: { data: { after, children }} } = await axios.get('https://oauth.reddit.com/best.json?sr_detail=true',
-					{
-						params: {
-							limit: 10,
-							after: nextAfter,
-						}
-					});
-				setNextAfter(after);
-				setPosts(prevState => {
-					return prevState.concat(...children);
-				});
-				setCountLoad(countLoad + 1);
-			} catch (e) {
-				setCountLoad(0);
-				setErrorLoading(String(e));
+				dispatch(fetchPosts({ nextAfter }));
 			} finally {
 				setLoading(false);
 			}
@@ -54,15 +42,16 @@ export default function CardsList(): React.JSX.Element {
 	}, [nextAfter, countLoad]);
 
 	function handlerLoadMore() {
-		setCountLoad(0);
+		dispatch(setCountFetch(0));
 	}
 
 	return (
 		<ul className={style.cardsList}>
-			{ !posts.length && !loading && !errorLoading && (
+			{ !allPosts.length && !loading && !errorLoading && (
 				<div style={{textAlign: 'center'}}>Список постов пуст</div>
 			)}
 			{cards}
+			<Outlet />
 			<div ref={bottomOfList}></div>
 			{ loading && countLoad < 3 && <div style={{textAlign: 'center'}}>Загрузка...</div> }
 			{ countLoad >= 3 && <button className={style.loadMore} onClick={handlerLoadMore}>Загрузить ещё</button> }
