@@ -1,10 +1,10 @@
 import {Comment} from "./Comment/Comment";
 
 export function Comments ({comments}) {
-    const currentComments = comments.map((comment) => <Comment comment={comment} key={self.crypto.randomUUID()}/>)
+    const currentComments = comments?.map((comment) => <Comment comment={comment} key={self.crypto.randomUUID()}/>)
     return (
         <ul>
-            { currentComments }
+            { currentComments ? currentComments : <div style={{textAlign: 'center'}}>Загрузка...</div> }
         </ul>
     );
 }
