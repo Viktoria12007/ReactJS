@@ -14,34 +14,37 @@ import {postById} from "../../features/posts/postsSlice";
 import axios from "axios";
 
 export function Post() {
-    const [comments, setComments] = useState([]);
+    const [comments, setComments] = useState(null);
+    const [errorComments, setErrorComments] = useState('');
     const ref = useRef<HTMLDivElement>(null);
     const { id } = useParams();
     const navigate = useNavigate();
     const dataPost = useSelector(state => postById(state, id))?.data;
 
     function onClose() {
-        navigate(-1);
+        navigate("/posts");
     }
 
-    function handleClick(e: MouseEvent) {
+    function hideModalWindow(e: MouseEvent) {
         if (e.target instanceof Node && !ref.current?.contains(e.target)) {
             onClose();
         }
     }
+
     useEffect(() => {
-        document.addEventListener('click', handleClick);
+        document.addEventListener('mousedown', hideModalWindow);
         async function load() {
             try {
                 const dataComments = await axios.get(`http://api.reddit.com/r/${dataPost?.subreddit}/comments/${dataPost?.id}`);
-                setComments(dataComments ? dataComments.data.filter((item) => !item.data.dist).map((item) => item.data.children).flat().filter((item) => item.kind !== 'more') : []);
+                setComments(dataComments.data.filter((item) => !item.data.dist).map((item) => item.data.children).flat().filter((item) => item.kind !== 'more'));
             } catch (e) {
+                setErrorComments(e.message);
                 console.error(e);
             }
         }
         load();
         return () => {
-            document.removeEventListener('click', handleClick);
+            document.removeEventListener('mousedown', hideModalWindow);
         }
     }, []);
 
@@ -63,7 +66,7 @@ export function Post() {
                                 <img className={style.previewImg} alt='post' src={dataPost.thumbnail}></img>
                                 {/*<CommentFormContainer/>*/}
                                 <CommentFormFormik/>
-                                <Comments comments={comments}/>
+                                {!errorComments ? <Comments comments={comments}/> : <div style={{textAlign: 'center'}}>{errorComments}</div>}
                             </div>
                         </>
              : <div className={style.content}>Такого поста не существует!</div>
