@@ -25,9 +25,9 @@ export default function App(): React.JSX.Element {
         } else {
             dispatch(setToken(sessionStorage.blogAppToken));
         }
-        // if (url.pathname === '/auth' || url.pathname === '/') {
-        //     navigate('/posts');
-        // }
+        if (url.pathname === '/auth' || url.pathname === '/') {
+            navigate('/posts');
+        }
     }, []);
 
     return (
