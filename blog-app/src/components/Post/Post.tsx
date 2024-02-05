@@ -6,8 +6,8 @@ import * as React from "react";
 import TextContent from "../CardsList/Card/TextContent/TextContent";
 import {Comments} from "../Comments/Comments";
 import Icon from "../Icons/components/Icon";
-// import {CommentFormContainer} from "../CommentFormContainer";
-import {CommentFormFormik} from "../CommentForm/CommentFormFormik";
+import {CommentFormContainer} from "../CommentFormContainer";
+// import {CommentFormFormik} from "../CommentForm/CommentFormFormik";
 import {useNavigate, useParams} from 'react-router-dom';
 import {useSelector} from "react-redux";
 import {postById} from "../../features/posts/postsSlice";
@@ -64,8 +64,8 @@ export function Post() {
                             <div className={style.content}>
                                 {dataPost.selftext && <p className={style.textModal}>{dataPost.selftext}</p>}
                                 <img className={style.previewImg} alt='post' src={dataPost.thumbnail}></img>
-                                {/*<CommentFormContainer/>*/}
-                                <CommentFormFormik/>
+                                <CommentFormContainer/>
+                                {/*<CommentFormFormik/>*/}
                                 {!errorComments ? <Comments comments={comments}/> : <div style={{textAlign: 'center'}}>{errorComments}</div>}
                             </div>
                         </>

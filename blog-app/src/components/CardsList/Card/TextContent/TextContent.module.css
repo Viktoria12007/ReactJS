@@ -19,6 +19,10 @@
     display: none;
 }
 
+.createdAt {
+    white-space: nowrap;
+}
+
 .createdAt,
 .createdAt span {
     color: var(--grey99);
